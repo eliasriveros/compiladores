@@ -50,7 +50,7 @@ void sigLex()
 	char msg[41];
 	entrada e;
 
-	while((c=fgetc(archivo))!=EOF)
+	while((c=fgetc(archivo))!=EOF)	//fgetc lee caracter a caracter
 	{
 		
 		if (c==' ' || c=='\t')
@@ -61,7 +61,7 @@ void sigLex()
 			numLinea++;
 			continue;
 		}
-		else if (isalpha(c))
+		else if (isalpha(c))	//isalpha machea con los caracteres alfabéticos [a-zA-Z][a-zA-Z0-9]
 		{
 			//es un identificador (o palabra reservada)
 			i=0;
@@ -72,14 +72,14 @@ void sigLex()
 				if (i>=TAMLEX)
 					error("Longitud de Identificador excede tamaño de buffer");
 			}while(isalpha(c) || isdigit(c));
-			id[i]='\0';
+			id[i]='\0'; // \0 indica el fin de un id 
 			if (c!=EOF)
 				ungetc(c,archivo);
 			else
 				c=0;
-			t.pe=buscar(id);
+			t.pe=buscar(id); //si es una palabra reservada estaría precargada y encontraría ya aqui
 			t.compLex=t.pe->compLex;
-			if (t.pe->compLex==-1)
+			if (t.pe->compLex==-1) //si es -1 no existía esa entrada, es un ID
 			{
 				strcpy(e.lexema,id);
 				e.compLex=ID;
