@@ -38,7 +38,7 @@ int numLinea=1;			// Numero de Linea
 
 void error(const char* mensaje)
 {
-	printf("Lin %d: Error Lexico. %s.\n",numLinea,mensaje);	
+	printf("Lin %d: Error Lexico. %s.\n",numLinea,mensaje);	//envia un mensaje de error y el numero en el cual ocurrió
 }
 
 void sigLex()
@@ -61,7 +61,7 @@ void sigLex()
 			numLinea++;
 			continue;
 		}
-		else if (isalpha(c))	//isalpha machea con los caracteres alfabéticos [a-zA-Z][a-zA-Z0-9]
+		else if (isalpha(c))	//isalpha machea con los caracteres alfabéticos [a-zA-Z][a-zA-Z]
 		{
 			//es un identificador (o palabra reservada)
 			i=0;
@@ -74,7 +74,7 @@ void sigLex()
 			}while(isalpha(c) || isdigit(c));
 			id[i]='\0'; // \0 indica el fin de un id 
 			if (c!=EOF)
-				ungetc(c,archivo);
+				ungetc(c,archivo); 
 			else
 				c=0;
 			t.pe=buscar(id); //si es una palabra reservada estaría precargada y encontraría ya aqui
@@ -214,7 +214,7 @@ void sigLex()
 							error("No se esperaba el fin de archivo");
 						else
 							error(msg);
-						exit(1);
+						exit(1); //no debe terminar aqui la compilación
 					}
 				}
 			break;
