@@ -58,7 +58,7 @@ typedef struct entrada{
 	int compLex;
 	char lexema[TAMLEX];	
 	struct entrada *tipoDato; // null puede representar variable no declarada	
-	// aqui irian mas atributos para funciones y procedimientos...
+	// aqui irian mas atributos para funciones y procedimientos
 	
 } entrada;
 
