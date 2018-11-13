@@ -1,4 +1,4 @@
-#include "anlex.h"
+#include "lexer.h"
 
 /*********************HASH************************/
 entrada *tabla;				//declarar la tabla de simbolos
@@ -136,34 +136,18 @@ void initTablaSimbolos()
 		"writeln",
 		"write",
 		"const"
-	};
+};
  	for (i=0;i<28;i++)
 	{
 		insertTablaSimbolos(vector[i],i+256);
 	}
-	insertTablaSimbolos(",",',');
-	insertTablaSimbolos(".",'.');
-	insertTablaSimbolos(":",':');
-	insertTablaSimbolos(";",';');
-	insertTablaSimbolos("(",'(');
-	insertTablaSimbolos(")",')');
-	insertTablaSimbolos("[",'[');
-	insertTablaSimbolos("]",']');
-	insertTablaSimbolos("true",BOOL);
-	insertTablaSimbolos("false",BOOL);
-	insertTablaSimbolos("not",NOT);
-	insertTablaSimbolos("<",OPREL);
-	insertTablaSimbolos("<=",OPREL);
-	insertTablaSimbolos("<>",OPREL);
-	insertTablaSimbolos(">",OPREL);
-	insertTablaSimbolos(">=",OPREL);
-	insertTablaSimbolos("=",OPREL);
-	insertTablaSimbolos("+",OPSUMA);
-	insertTablaSimbolos("-",OPSUMA);
-	insertTablaSimbolos("or",OPSUMA);
-	insertTablaSimbolos("*",OPMULT);
-	insertTablaSimbolos("/",OPMULT);
-	insertTablaSimbolos("div",OPMULT);
-	insertTablaSimbolos("mod",OPMULT);
-	insertTablaSimbolos(":=",OPASIGNA);
+	insertTablaSimbolos(",",COMA);
+	insertTablaSimbolos(":",DOS_PUNTOS);
+	insertTablaSimbolos("{",L_LLAVE);
+	insertTablaSimbolos("}",R_LLAVE);
+	insertTablaSimbolos("[",L_CORCHETE);
+	insertTablaSimbolos("]",R_CORCHETE);
+	insertTablaSimbolos("true",PR_TRUE);
+	insertTablaSimbolos("false",PR_FALSE);
+	insertTablaSimbolos(":",DOS_PUNTOS);
 }
