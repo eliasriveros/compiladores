@@ -1,4 +1,4 @@
-#include "lexer.h"
+#include "anlex.h"
 
 /*********************HASH************************/
 entrada *tabla;				//declarar la tabla de simbolos
@@ -21,9 +21,9 @@ int h(const char* k, int m)
 }
 
 void initTabla()
-{	
+{
 	int i=0;
-	
+
 	tabla=(entrada*)malloc(tamTabla*sizeof(entrada));
 	for(i=0;i<tamTabla;i++)
 	{
@@ -49,7 +49,7 @@ int siguiente_primo(int n)
 	return n;
 }
 
-//en caso de que la tabla llegue al limite, duplicar el tamaño
+//en caso de que la tabla llegue al limite, duplicar el tama�o
 void rehash()
 {
 	entrada *vieja;
@@ -61,7 +61,7 @@ void rehash()
 	{
 		if(vieja[i].compLex!=-1)
 			insertar(vieja[i]);
-	}		
+	}
 	free(vieja);
 }
 
@@ -79,18 +79,17 @@ void insertar(entrada e)
 			pos=0;
 	}
 	tabla[pos]=e;
-
 }
 //busca una clave en la tabla, si no existe devuelve NULL, posicion en caso contrario
 entrada* buscar(const char *clave)
 {
 	int pos;
-	pos=h(clave,tamTabla);
-	while(tabla[pos].compLex!=-1 && strcmp(tabla[pos].lexema,clave)!=0 )
+	pos = h(clave,tamTabla);
+	while (tabla[pos].compLex != -1 && strcmp(tabla[pos].lexema,clave) != 0 )
 	{
 		pos++;
-		if (pos==tamTabla)
-			pos=0;
+		if (pos == tamTabla)
+			pos = 0;
 	}
 	return &tabla[pos];
 }
@@ -106,48 +105,13 @@ void insertTablaSimbolos(const char *s, int n)
 
 void initTablaSimbolos()
 {
-	int i;
-	const char *vector[]={
-		"program",
-		"type",
-		"var",
-		"array",
-		"begin",
-		"end",
-		"do",
-		"to",
-		"downto",
-		"then",
-		"of",
-		"function",
-		"procedure", 
-		"integer", 
-		"real", 
-		"boolean", 
-		"char", 
-		"for", 
-		"if", 
-		"else", 
-		"while", 
-		"repeat", 
-		"until", 
-		"case", 
-		"record", 
-		"writeln",
-		"write",
-		"const"
-};
- 	for (i=0;i<28;i++)
-	{
-		insertTablaSimbolos(vector[i],i+256);
-	}
-	insertTablaSimbolos(",",COMA);
-	insertTablaSimbolos(":",DOS_PUNTOS);
-	insertTablaSimbolos("{",L_LLAVE);
-	insertTablaSimbolos("}",R_LLAVE);
-	insertTablaSimbolos("[",L_CORCHETE);
-	insertTablaSimbolos("]",R_CORCHETE);
-	insertTablaSimbolos("true",PR_TRUE);
-	insertTablaSimbolos("false",PR_FALSE);
-	insertTablaSimbolos(":",DOS_PUNTOS);
+	insertTablaSimbolos("[", L_CORCHETE);
+	insertTablaSimbolos("]", R_CORCHETE);
+	insertTablaSimbolos("{", L_LLAVE);
+	insertTablaSimbolos("}", R_LLAVE);
+	insertTablaSimbolos(",", COMA);
+	insertTablaSimbolos(":", DOS_PUNTOS);
+	insertTablaSimbolos("true", PR_TRUE);
+	insertTablaSimbolos("false", PR_FALSE);
+	insertTablaSimbolos("null", PR_NULL);
 }
